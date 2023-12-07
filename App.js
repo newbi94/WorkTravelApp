@@ -17,6 +17,7 @@ import Checkbox from 'expo-checkbox';
 const STORAGE_KEY = "@toDos";
 
 test
+aaa test2
 
 export default function App() {
   
