@@ -1,5 +1,5 @@
 import { StatusBar } from "expo-status-bar";
-import React, { startTransition, useEffect, useState } from "react"
+import React, { startTransition, useEffect, useState, } from "react"
 import {
   StyleSheet,
   Text,
@@ -16,8 +16,6 @@ import { theme } from "./colors";
 import Checkbox from 'expo-checkbox';
 const STORAGE_KEY = "@toDos";
 
-test
-aaa test2
 
 export default function App() {
   
@@ -42,17 +40,17 @@ export default function App() {
   };
 
   const edit = (key) => {
-    const newTodos = [...toDos];
+    const newTodos = {...toDos};
     newTodos[key].isEdit = !newTodos[key].isEdit;
-    setTodos(newTodos);
+    setToDos(newTodos);
   };
 
   const editToDos = (key) => {
-    const newTodos = [...toDos];
+    const newTodos = {...toDos};
     newTodos[key].text = editText;
     newTodos[key].isEdit = false;
-    setTodos(newTodos);
-    seteditText("");
+    setToDos(newTodos);
+    setEditText("");
   };
 
   const onChangeText = (payload) => setText(payload);
@@ -148,7 +146,7 @@ export default function App() {
       </View>
       <TextInput
        onSubmitEditing={addToDo}
-        onChangeText={setText}
+        onChangeText={onChangeText}
         returnKeyType="done"
         value={text}
         placeholder={
@@ -177,13 +175,13 @@ export default function App() {
                     />
                   </TouchableOpacity>
                 )}
-              <Text style={styles.toDoText}>{toDos[key].text}</Text>
               
               {toDos[key].isEdit ? (
               <TextInput
                   style={styles.editInput}
                   onSubmitEditing={() => editToDos(key)}
                   defaultValue={toDos[key].text}
+                  value={editText}
                   onChangeText={setEditText}
                   returnKeyType="done"
                 />) : (
@@ -201,7 +199,7 @@ export default function App() {
                   </Text>
                 )
               }
-              <TouchableOpacity onPress={() => edit(toDos.key)}>
+              <TouchableOpacity onPress={() => edit(key)}>
                     <AntDesign name="edit" size={24} color="white" />
               </TouchableOpacity>
               <TouchableOpacity onPress={() => deleteToDo(key)}>
