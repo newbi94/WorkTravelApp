@@ -50,11 +50,12 @@ export default function App() {
     newTodos[key].text = editText;
     newTodos[key].isEdit = false;
     setToDos(newTodos);
+    saveToDos(newTodos);
     setEditText("");
   };
 
-  const onChangeText = (payload) => setText(payload);
-
+  // const onChangeText = (payload) => setText(payload);
+//없어도 그만인 부분인듯
   
   const saveMode = async(mode) => {
     try {
@@ -146,7 +147,7 @@ export default function App() {
       </View>
       <TextInput
        onSubmitEditing={addToDo}
-        onChangeText={onChangeText}
+        onChangeText={setText} // 위에 onChangeText 함수를 지우고 {onChangeText} -> {setText}
         returnKeyType="done"
         value={text}
         placeholder={
@@ -181,9 +182,10 @@ export default function App() {
                   style={styles.editInput}
                   onSubmitEditing={() => editToDos(key)}
                   defaultValue={toDos[key].text}
-                  value={editText}
+                  
                   onChangeText={setEditText}
                   returnKeyType="done"
+                
                 />) : (
                   <Text
                     style={
