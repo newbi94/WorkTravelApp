@@ -45,12 +45,12 @@ export default function App() {
     setToDos(newTodos);
   };
 
-  const editToDos = (key) => {
+  const editToDos = async (key) => {
     const newTodos = {...toDos};
     newTodos[key].text = editText;
     newTodos[key].isEdit = false;
     setToDos(newTodos);
-    saveToDos(newTodos);
+    await saveToDos(newTodos);
     setEditText("");
   };
 
@@ -107,17 +107,17 @@ export default function App() {
     await saveToDos(newToDos);
   };
 
-  const deleteToDo = (key) => {
+  const deleteToDo = async (key) => {
     Alert.alert("Delete To Do", "Are you sure?", [
       { text: "Cancel" },
       {
         text: "I'm Sure",
         style: "destructive",
-        onPress: () => {
+        onPress: async () => {
           const newToDos = { ...toDos };
           delete newToDos[key];
           setToDos(newToDos);
-          saveToDos(newToDos);
+          await saveToDos(newToDos);
         },
       },
     ]);
